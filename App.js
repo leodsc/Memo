@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { AlarmeMsg, WhatsMsg, AlertMsg } from './warns/msgTypes';
+import { 
+  AlarmeMsg, WhatsMsg, 
+  AlertMsg, DeleteMsg } 
+  from './warns/msgTypes';
 
 class App extends Component {
   render() {
@@ -8,3 +11,5 @@ class App extends Component {
     )
   }
 }
+
+export default App;

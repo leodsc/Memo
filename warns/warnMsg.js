@@ -1,15 +1,18 @@
-import { Text, View, Image } from 'react-native';
-import { AlarmeBtns, OkButton, listContactsBtn } from './buttons';
-import { textMsgStyle } from './styles';
+import { Text, View, Image, StyleSheet } from 'react-native';
 import React from 'react';
 
 // componente para carregar imagem do whatsapp caso a mensagem seja de AVISO
-const ImgHeader = (props) => {
-  if (props.img == String(true)){
+const WarnImg = (props) => {
+  if (props.imgURL){
     return (
           <Image 
-            style={{ width: 64, height: 64, position: 'absolute', left: '80%'}}
-            source={{uri: 'https://files.softicons.com/download/android-icons/flat-icons-by-martz90/png/64x64/whatsapp.png'}}>
+            style={{ 
+              width: 64, 
+              height: 64, 
+              position: 'absolute', 
+              left: '80%',
+            }}
+            source={{uri: props.imgURL}}>
           </Image>
     )
   } else {
@@ -18,16 +21,6 @@ const ImgHeader = (props) => {
 }
 
 export const WarnMsg = (props) => {
-  var buttons;
-  if (props.title == "ALERTA"){
-    buttons = React.createElement(OkButton, {type: 'alert'});
-  } else if (props.title == "AVISO"){
-    buttons = React.createElement(listContactsBtn, {type: 'whats'});
-  } else if (props.title == "ALARME") {
-    buttons = React.createElement(AlarmeBtns, {type: 'alarme'});
-  }
-
-
   return (
     <View style={{
       width: 370,
@@ -68,16 +61,31 @@ export const WarnMsg = (props) => {
         }}>
           {props.title}
         </Text>
-        <ImgHeader img={props.img}></ImgHeader>
+        <WarnImg
+        imgURL={props.imgURL}></WarnImg>
       </View>
-
-      <Text style={textMsgStyle}>
-        {props.msg}
-      </Text>
-      <Text style={textMsgStyle}>
-        {props.subMsg}
-      </Text>
-      {buttons}
+      <View styles={{
+        width: props.msgBoxWidth
+      }}>
+        <Text style={styles.textMsg}>
+          {props.msg}
+        </Text>
+        <Text style={styles.textMsg}>
+          {props.subMsg}
+        </Text>
+      </View>
+      {props.buttons.style}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  textMsg: {
+    fontSize: 24,
+    fontFamily: 'Roboto',
+    color: '#12263A',
+    textAlign: 'center',
+    top: '5%',
+    textShadowRadius: 10
+  }
+})
