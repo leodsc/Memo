@@ -19,7 +19,7 @@ export const WhatsMsg = () => {
 }
 
 // componente alerta
-export const AlertMsg = () => {
+export const AlertMsg = (props) => {
   return (
     <>
       <WarnMsg
@@ -27,7 +27,7 @@ export const AlertMsg = () => {
         title="ALERTA"
         msg="Quantidade de {nomeRemedio} está abaixo de 20%"
         imgURL="https://pics.freeicons.io/uploads/icons/png/4284390491586786154-512.png"
-        buttons={{style: React.createElement(AlertBtns)}}
+        buttons={{style: React.createElement(AlertBtns, {container: props.container})}}
       >
       </WarnMsg>
     </>
