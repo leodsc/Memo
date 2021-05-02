@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+// import Form from "react-validation/build/form";
+// import Input from "react-validation/build/input";
+// import CheckButton from "react-validation/build/button";
+// import { isEmail } from "validator";
 
 import AuthService from "../services/auth.service";
 
@@ -16,15 +16,15 @@ const required = (value) => {
   }
 };
 
-const validEmail = (value) => {
-  if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
+// const validEmail = (value) => {
+//   if (!isEmail(value)) {
+//     return (
+//       <div className="alert alert-danger" role="alert">
+//         This is not a valid email.
+//       </div>
+//     );
+//   }
+// };
 
 const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
@@ -132,7 +132,7 @@ const Register = (props) => {
                   name="email"
                   value={email}
                   onChange={onChangeEmail}
-                  validations={[required, validEmail]}
+                  // validations={[required, validEmail]}
                 />
               </div>
 

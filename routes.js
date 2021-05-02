@@ -1,22 +1,43 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import Home from './components/Home'
 
-import Login from './pages/login';
-import Logged from './pages/logged';
+import AuthLoadingScreen from './pages/AuthLoadingScreen'
 
-export const SignedOutRoutes = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      title: "Entrar"
-    }
+
+const StackNavigator = createStackNavigator(
+  {
+     Home,
   },
-});
-
-export const SignedInRoutes = createStackNavigator({
-  Logged: {
-    screen: Logged,
-    navigationOptions: {
-      title: "Perfil"
-    }
+  {
+   initialRouteName: 'Home',
+  });
+const AuthStack = createStackNavigator(
+  {
+    SignIn: Login,
+    App: StackNavigator,
+    // SignUp: RegisterUser
   },
-});
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+    header: null,
+  },);
+const RootStack = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    Auth: AuthStack,
+    App: StackNavigator,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+    headerMode: 'none',
+    navigationOptions: {
+      header: null,
+    },
+   },);
+const RootStackContainer = createAppContainer(RootStack)
+
+export default RootStackContainer
