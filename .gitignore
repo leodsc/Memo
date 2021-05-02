@@ -6,6 +6,5 @@ node_modules
 App.js
 app.json
 babel*
-index.js
 metro*
 yarn.lock

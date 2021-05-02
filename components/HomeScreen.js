@@ -4,19 +4,15 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 export default class HomeScreen extends Component {
 
-  static navigationOptions = {
-    drawerLabel: 'Home',
-
-  };
 
   render() {
     return (
       <View style={{ flex: 1}}>
         <Text>Home Screen</Text>
-        <Button
+        {/* <Button
           title="Go to Login"
           onPress={() => this.props.navigation.navigate('Login')}
-        />
+        /> */}
       </View>
     )
   }
