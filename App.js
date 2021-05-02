@@ -6,6 +6,7 @@ import {
   from './warns/msgTypes';
 import { getContainer } from './warns/buttons';
 import ContactsWindow from './whats/addContact';
+import { Index } from './components/index';
 
 // use this function to create a message
 const createMsg = (msgType) => {
@@ -17,9 +18,14 @@ const createMsg = (msgType) => {
 
 class App extends Component {
   render() {
-    const alertMsg = createMsg(AlertMsg);
+    // const alertMsg = createMsg(AlertMsg);
     return (
-      alertMsg
+      <Index
+      textStyle={
+        {fontSize: 20, position: 'relative', fontFamily: 'Roboto',
+        color: 'white', top: '25%', textAlign: 'center'}}
+      text={"Meus Remédios"}
+      bannerState={{uri: 'https://i.ibb.co/7CPTDR0/add.png'}}/>
     )
   }
 }

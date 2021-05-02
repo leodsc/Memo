@@ -31,58 +31,57 @@ export const getContainer = (container) => {
 }
 
 // componente que cria botoes de mensagens de aviso do app
-const WarnButton = (props) => {
-  const [toggleWindow, setToggleWindow] = useState(false);  
+export const WarnButton = (props) => {
+  // var [toggleWindow, setToggleWindow] = useState(false);  
 
-  const warnTypes = {
-    alarme: {
-      "confirm": function() {
-        console.log('confirm alarme');
-      },
-      "decline": function() {
-        console.log('decline alarme');
-      }
-    },
-    whats: {
-      "confirm": function() {
-        console.log('confirm whats');
-      },
-      "decline": function() {
-        console.log('decline whats');
-      }
-    },
-    alert: {
-      "confirm": function() {
-        console.log('confirm alert');
-      }
-    },
-    delete: {
-      "confirm": function() {
-        console.log('confirm delete');
-      },
-      "decline": function(){
-        console.log('decline delete');
-      }
-    }
-  }
+  // const warnTypes = {
+  //   alarme: {
+  //     "confirm": function() {
+  //       console.log('confirm alarme');
+  //     },
+  //     "decline": function() {
+  //       console.log('decline alarme');
+  //     }
+  //   },
+  //   whats: {
+  //     "confirm": function() {
+  //       console.log('confirm whats');
+  //     },
+  //     "decline": function() {
+  //       console.log('decline whats');
+  //     }
+  //   },
+  //   alert: {
+  //     "confirm": function() {
+  //       console.log('confirm alert');
+  //     }
+  //   },
+  //   delete: {
+  //     "confirm": function() {
+  //       console.log('confirm delete');
+  //     },
+  //     "decline": function(){
+  //       console.log('decline delete');
+  //     }
+  //   }
+  // }
   
-  const toggle = () => {
-    setToggleWindow(() => {
-      if (!toggleWindow){
-        const changeState = warnTypes[props.type][props.status];
-        changeState();
-        ReactDOM.unmountComponentAtNode(containerPointer);
-        toggleWindow = !toggleWindow;
-      }
-      }
-    );
-  }
+  // const toggle = () => {
+  //   setToggleWindow(() => {
+  //     if (!toggleWindow){
+  //       const changeState = warnTypes[props.type][props.status];
+  //       changeState();
+  //       toggleWindow = !toggleWindow;
+  //     }
+  //     }
+  //   );
+  // }
 
   return (
     <View style={{position: 'relative', top: props.top, left: props.left}}>
       <TouchableOpacity 
       style={props.styleType}
-      onPress={toggle}>
+      onPress={console.log('oi')}>
         <Text style={styles.text}>
           {props.text}
         </Text>
@@ -118,7 +117,6 @@ export const AlarmeBtns = () => {
 
 // componente dos botoes do whats
 export const WhatsBtns = () => {
-  []
   return (
     <>
       <WarnButton

@@ -8,9 +8,10 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/', (req, res) => {
-    if (req.body.Body.split(" ")[0] == 'Adicionar'){
-        console.log('numero adicionado');
-    }
+    // if (req.body.Body.split(" ")[0] == 'Adicionar'){
+    //     console.log('numero adicionado');
+    // }
+    console.log(req.body.Body);
 })
 
 app.listen(PORT, () => {
