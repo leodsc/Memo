@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { InfoPilula } from './pilula';
+import { RemedioConsumido } from './remedioConsumido';
 
 export const Remedio = (props) => {
     return (
@@ -21,37 +23,8 @@ export const Remedio = (props) => {
                     color="#EBAD6F"/>
                 </View>
             </ScrollView>
-            <View style={{alignItems: 'center'}}>
-                <Button
-                text={props.status}/>
-            </View>
-        </View>
-    )
-}
-
-const Button = (props) => {
-    return (
-        <View style={styles.buttonCtn}>
-            <TouchableOpacity
-            >
-                <Text style={styles.buttonText}>{props.text}</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-const InfoPilula = (props) => {
-    return (
-        <View style={{flexDirection: 'row', marginTop: 20}}>
-            <Text style={{fontSize: 20, flex: 0.93}}>{props.text}</Text>
-            <View style={
-                {width: 34, 
-                height: 25, 
-                backgroundColor: props.color,
-                borderRadius: 10,
-                }}>
-                <Text style={{textAlign: 'center'}}>{props.quantidade}</Text>
-            </View>
+            <RemedioConsumido
+            text={props.status}/>
         </View>
     )
 }
@@ -94,18 +67,4 @@ const styles = StyleSheet.create({
         flex: 1.5,
         left: '50%'
     },
-    buttonCtn: {
-        width: 170,
-        height: 50,
-        backgroundColor: "#D0F68E",
-        borderRadius: 10,
-        top: '-50%',
-    },
-    buttonText: {
-        textAlign: 'center',
-        fontSize: 21,
-        color: '#12263A',
-        fontWeight: 'bold',
-        top: '30%'
-    }
 })

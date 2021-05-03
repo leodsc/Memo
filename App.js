@@ -1,52 +1,86 @@
-// import RootStackContainer from './routes'
-// import { ThemeProvider } from 'styled-components'
-// // import globalStyles from './styles/globalStyles'
-// // import { ThemeProvider } from 'styled-components'
-// import { globalStyles } from './styles'
-
-// import './config/ReactotronConfig'
-import React, { Component } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './components/HomeScreen';
-// import AppNavigator from './routes';
-
-import Login from './components/Login';
-import { Index } from './components/index';
-
-import { createAppContainer } from 'react-navigation';
-// const AppContainer = createAppContainer(AppNavigator);
-
-// export default class App extends React.Component {
-//   render() {
-//     return <AppContainer />;
-//   }
-// }
+import { HomeScreen, nextPage } from './components/home';
+import { NovoRemedio } from './components/criarRemedio';
+import { Text, TouchableOpacity } from 'react-native';
+import { Cadastro } from './components/cadastro';
 
 const Stack = createStackNavigator();
 
-// use this function to create a message
-const createMsg = (msgType) => {
-  // argument is a component that you want to create
-  const msg = <View>{React.createElement(msgType)}</View>;
-  getContainer(msg);
-  return msg;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Meus Remédios" component={HomeScreen}
+        options={
+          {
+            headerStyle: {
+              backgroundColor: '#12263A',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: 'bold',
+          headerRight: () => (
+            <Add/>
+          ),
+        }
+        }/>
+        <Stack.Screen name="Novo Remedio" component={NovoRemedio}
+        options={styles.novo}/>
+        {/* <Stack.Screen name="Cadastrar Conta" component={Cadastro} options={styles.cadastro}/> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
+const Add = () => {
+  return (
+    <TouchableOpacity
+    onPress={() => {
+      nextPage.navigate('Novo Remedio')}}
+    style={{
+      width: 46,
+      height: 46,
+    }}>
+      <Text style=
+      {{
+        color: 'white',
+        fontSize: 30,
+      }}>+</Text>
+    </TouchableOpacity>
+  )
+}
 
+// const bannerStyle = {
+//   headerStyle: {
+//       backgroundColor: '#12263A',
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: 'bold'
+// }
 
-
-function App() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Index">
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Index" component={Index}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-
-
-export default App;
-
+const styles = {
+  home: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+  },
+  novo: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+    title: 'Novo Remédio'
+  },
+  cadastro: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+    title: 'Cadastrar Conta'
+  }
+}
