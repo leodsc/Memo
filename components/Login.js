@@ -92,7 +92,7 @@ export default function Login(props) {
 
       const resetAction = StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Logged' })],
+        actions: [NavigationActions.navigate({ routeName: 'Home' })],
       })
 
       setLoading(false)
@@ -108,17 +108,15 @@ export default function Login(props) {
 
   };
 
-  return (
-     
-          <Container>
-      <StatusBar barStyle="light-content" />
+  return (     
+      <Container>
+        <StatusBar barStyle="light-content" />
+          <Title>Bem-vindo</Title>
+          <TextInformation>
+          Para continuar, precisamos que você informe seu usuário
+          </TextInformation>
 
-      <Title>Bem-vindo</Title>
-      <TextInformation>
-        Para continuar, precisamos que você informe seu usuário
-      </TextInformation>
-
-      {!!message && <Error>{message}</Error>}
+            {!!message && <Error>{message}</Error>}
 
       <Form>
         <Input

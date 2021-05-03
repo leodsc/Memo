@@ -21,7 +21,7 @@
     "react": "16.13.1",
     "react-bootstrap": "^0.32.4",
     "react-dom": "16.13.1",
-    "react-native": "^0.64.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
