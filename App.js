@@ -1,33 +1,86 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { 
-  AlarmeMsg, WhatsMsg, 
-  AlertMsg, DeleteMsg } 
-  from './warns/msgTypes';
-import { getContainer } from './warns/buttons';
-import ContactsWindow from './whats/addContact';
-import { Index } from './components/index';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { HomeScreen, nextPage } from './components/home';
+import { NovoRemedio } from './components/criarRemedio';
+import { Text, TouchableOpacity } from 'react-native';
+import { Cadastro } from './components/cadastro';
 
-// use this function to create a message
-const createMsg = (msgType) => {
-  // argument is a component that you want to create
-  const msg = <View>{React.createElement(msgType)}</View>;
-  getContainer(msg);
-  return msg;
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Meus Remédios" component={HomeScreen}
+        options={
+          {
+            headerStyle: {
+              backgroundColor: '#12263A',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: 'bold',
+          headerRight: () => (
+            <Add/>
+          ),
+        }
+        }/>
+        <Stack.Screen name="Novo Remedio" component={NovoRemedio}
+        options={styles.novo}/>
+        {/* <Stack.Screen name="Cadastrar Conta" component={Cadastro} options={styles.cadastro}/> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
-class App extends Component {
-  render() {
-    // const alertMsg = createMsg(AlertMsg);
-    return (
-      <Index
-      textStyle={
-        {fontSize: 20, position: 'relative', fontFamily: 'Roboto',
-        color: 'white', top: '25%', textAlign: 'center'}}
-      text={"Meus Remédios"}
-      bannerState={{uri: 'https://i.ibb.co/7CPTDR0/add.png'}}/>
-    )
+const Add = () => {
+  return (
+    <TouchableOpacity
+    onPress={() => {
+      nextPage.navigate('Novo Remedio')}}
+    style={{
+      width: 46,
+      height: 46,
+    }}>
+      <Text style=
+      {{
+        color: 'white',
+        fontSize: 30,
+      }}>+</Text>
+    </TouchableOpacity>
+  )
+}
+
+// const bannerStyle = {
+//   headerStyle: {
+//       backgroundColor: '#12263A',
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: 'bold'
+// }
+
+const styles = {
+  home: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+  },
+  novo: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+    title: 'Novo Remédio'
+  },
+  cadastro: {
+    headerStyle: {
+      backgroundColor: '#12263A',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: 'bold',
+    title: 'Cadastrar Conta'
   }
 }
-
-export default App;
