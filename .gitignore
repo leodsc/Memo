@@ -8,3 +8,4 @@ app.json
 babel*
 metro*
 yarn.lock
+*.env

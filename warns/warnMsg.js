@@ -1,7 +1,7 @@
 import { Text, View, Image, StyleSheet } from 'react-native';
 import React from 'react';
 
-// componente para carregar imagem do whatsapp caso a mensagem seja de AVISO
+// componente para carregar imagem
 const WarnImg = (props) => {
   if (props.imgURL){
     return (
