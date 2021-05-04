@@ -36,7 +36,7 @@ export default function App() {
             headerTitleStyle: 'bold',
           headerRight: () => (
             <Button
-                onPress={() => alert('editarRemedio')}  
+                onPress={() => alert('vai pra página editarRemedio')}  
                 title="OK"
                 color="#fff"
               />

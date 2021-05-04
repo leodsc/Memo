@@ -1,6 +1,5 @@
 import React, { useState, useEffect }  from 'react';
 import axios from "axios";
-
 import { 
     View, Text, Image, StyleSheet, 
     ScrollView, StatusBar, Button } from 'react-native';
@@ -42,9 +41,6 @@ const HomeScreen = ({navigation, route}) => {
     })
 
     nextPage = navigation;
-
-
-
 
     return (
         <View>
@@ -96,7 +92,7 @@ const styles = StyleSheet.create({
         top: '-15%',
         width: 46,
         height: 45
-    }
+    },
 })
 
 export { HomeScreen, nextPage }

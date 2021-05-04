@@ -16,7 +16,7 @@ export const editarRemedio = () => {
 const Field = (props) => {
     return (
         <View style={styles.field}>
-            <Text style={{color: '#12263A', fontSize: 20, fontWeight: 'bold'}}>{props.title}</Text>
+            <Text style={{color: '#12263A', fontSize: 18, fontWeight: 'bold', paddingVertical: 5}}>{props.title}</Text>
             <TextInput style={{color: '#ACACAC'}}>{props.input}</TextInput>
         </View>
     )
@@ -25,19 +25,38 @@ const Field = (props) => {
 const styles = StyleSheet.create({
     container: {
         width: 370,
-        height: 384,
+        height: 460,
         backgroundColor: 'white',
         marginHorizontal: 20,
         marginTop: 80,
-        borderColor: 'black',
-        borderWidth: 3,
+        borderRadius: 4,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 2,
+        elevation: 3,
+    },
+    fieldContainer: {
+        height: 384,
     },
     field: {
-        backgroundColor: '#E6E6E6',
+        backgroundColor: '#F6F6F6',
         width: '90%',
         height: '20%',
         marginHorizontal: 18,
-        marginTop: 30,
+        marginTop: 15,
         borderRadius: 5,
+        paddingHorizontal: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 2,
+        elevation: 3,
     },
 })

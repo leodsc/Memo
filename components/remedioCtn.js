@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { InfoPilula } from './pilula';
 import { RemedioConsumido } from './remedioConsumido';
+import { CheckBox } from 'react-native-elements';
 
 export const Remedio = (props) => {
     return (
@@ -12,7 +13,7 @@ export const Remedio = (props) => {
                         <Text style={styles.nome}>{props.nome}</Text>
                         <View style={styles.select}></View>
                     </View>
-                    <Text style={{fontSize: 20}}>Próxima dose:</Text>
+                    <Text style={{fontSize: 20, paddingVertical: 10}}>Próxima dose:</Text>
                     <Text style={{textAlign: 'center', fontSize: 40, fontWeight: 'bold'}}>
                         {props.horario}</Text>
                     <InfoPilula 
@@ -31,22 +32,23 @@ export const Remedio = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 297,
+        width: 360,
         height: 340,
         backgroundColor: '#FFFFFF',
         marginTop: 50,
         shadowColor: "#000",
         shadowOffset: {
-          width: 0,
-          height: 7,
+            width: 0,
+            height: 2,
         },
-        shadowOpacity: 0.41,
-        shadowRadius: 9.11,
-        elevation: 14,
-        borderRadius: 10,
+        shadowOpacity: 0.30,
+        shadowRadius: 2,
+        elevation: 3,
+        borderRadius: 4,
     },
     info: {
         fontSize: 32,
+        marginLeft: 20,
     },
     nomeCtn: {
         flexDirection: 'row',
@@ -57,14 +59,15 @@ const styles = StyleSheet.create({
         fontSize: 23,
         flex: 10,
         color: '#12263A',
+        textAlign: 'center',
     },
     select: {
         borderWidth: 2,
         borderColor: '#000000',
-        height: 24,
-        width: 24,
-        borderRadius: 7,
-        flex: 1.5,
-        left: '50%'
+        height: 20,
+        width: 20,
+        borderRadius: 4,
+        flex: 1,
+        left: 50,
     },
 })

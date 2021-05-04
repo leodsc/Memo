@@ -10,6 +10,7 @@ export const InfoPilula = (props) => {
                 height: 25, 
                 backgroundColor: props.color,
                 borderRadius: 10,
+                padding: 4,
                 }}>
                 <Text style={{textAlign: 'center'}}>{props.quantidade}</Text>
             </View>
