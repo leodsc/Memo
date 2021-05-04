@@ -1,50 +1,23 @@
 import React, { useState, useEffect }  from 'react';
 import axios from "axios";
+import AuthService from "../services/auth.service"
 
 import { 
     View, Text, Image, StyleSheet, 
     ScrollView, StatusBar, Button } from 'react-native';
 import { Remedio } from './remedioCtn';
 import { Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var nextPage;
 
-const GetRemedios= () =>{
-    let remedios = axios.get('http://localhost:8080/api/medicine/all').then(
-        (data)=>{
-            remedios = data.data;
-            return remedios;
-        }
-    ).catch((error)=>{
-        console.log(error)
-    })
-    return remedios
-}
 
-const tryRemedies = ()=>{
-    const [rem, setRem]= useState([])
-    const [loading, setLoading]= useState(false);
-
-    useEffect(()=>{
-        setLoading(true);
-            fetch('http://localhost:8080/api/medicine/all')
-                .then((res)=>{
-                    setRem(res),
-                    setLoading(false)
-                })
-
-        
-    }, [setLoading])
-
-    return{
-        rem,
-        loading
-    }
-}
 
 const HomeScreen = ({navigation, route}) => {
     // const { remedios, loading} = tryRemedies();
     const[remedios, setRemedios] = useState([])
+    const[user, setUser]= useState({})
+    // console.log(cUser)
 
     useEffect(()=>{
         axios.get('http://localhost:8080/api/medicine/all').then(res =>{
@@ -53,7 +26,19 @@ const HomeScreen = ({navigation, route}) => {
         }).catch((error)=>{
             console.log(error)
         })
+
     })
+
+    useEffect(()=>{
+        async function guser(){
+            const user = await AsyncStorage.getItem("@user")
+            console.log(user);
+            setUser(user);
+
+        }
+
+        guser();
+    },[setUser])
     // console.log(remedios)
 
     nextPage = navigation;
@@ -66,28 +51,20 @@ const HomeScreen = ({navigation, route}) => {
         <ScrollView>
             <View style={styles.container}>
             
-            {remedios.map((remedio, index)=>{
+            { remedios.map((remedio, index)=>{
                 // console.log({remedios   });
                 // console.log(remedio.name);
+                // if(user.id == remedio.userId){
                 return (<Remedio nome = {remedio.name}
+                    key={remedio.id}
                     horario= {remedio.time}
                     qtdPorDia ={remedio.quantity}
                     total={remedio.total}
                     status="Consumir"/>)
+                // }
+                // return(<p>Nao há nada para ver, crie um alarme</p>)
             })}
             
-                {/* <Remedio nome="Metmorfina"
-                horario="18:00"
-                total="30"
-                qtdPorDia="2"
-                status="Consumida"/>
-                <Remedio nome="Metmorfina"
-                horario="18:00"
-                total="20"
-                qtdPorDia="1"
-                status="Não consumida"/>
-                <Remedio nome="Metmorfina"
-                horario="18:00"/> */}
             </View>
         </ScrollView>
         </View>

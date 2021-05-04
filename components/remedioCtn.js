@@ -23,7 +23,7 @@ export const Remedio = (props) => {
                     color="#EBAD6F"/>
                 </View>
             </ScrollView>
-            <RemedioConsumido
+            <RemedioConsumido id={props.key} subtraia={props.total} 
             text={props.status}/>
         </View>
     )
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     container: {
         width: 297,
         height: 340,
-        padding: 30,
         backgroundColor: '#FFFFFF',
         marginTop: 50,
         shadowColor: "#000",
