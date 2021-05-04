@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     container: {
         width: 297,
         height: 340,
+        padding: 30,
         backgroundColor: '#FFFFFF',
         marginTop: 50,
         shadowColor: "#000",

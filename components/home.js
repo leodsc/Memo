@@ -21,25 +21,40 @@ const GetRemedios= () =>{
     return remedios
 }
 
-const HomeScreen = ({navigation, route}) => {
-    const [rem, setRem]= useState(null)
+const tryRemedies = ()=>{
+    const [rem, setRem]= useState([])
+    const [loading, setLoading]= useState(false);
 
     useEffect(()=>{
-
-        let auxrem=[]
-        axios.get('http://localhost:8080/api/medicine/all').then(
-            (data)=>{
-                data.data.map((currentvalue)=>{
-                    auxrem.push(currentvalue);
+        setLoading(true);
+            fetch('http://localhost:8080/api/medicine/all')
+                .then((res)=>{
+                    setRem(res),
+                    setLoading(false)
                 })
-                
-            }
-        ).catch((error)=>{
+
+        
+    }, [setLoading])
+
+    return{
+        rem,
+        loading
+    }
+}
+
+const HomeScreen = ({navigation, route}) => {
+    // const { remedios, loading} = tryRemedies();
+    const[remedios, setRemedios] = useState([])
+
+    useEffect(()=>{
+        axios.get('http://localhost:8080/api/medicine/all').then(res =>{
+            // console.log(res.data)
+            setRemedios(res.data)
+        }).catch((error)=>{
             console.log(error)
         })
-        setRem(auxrem);
-
     })
+    // console.log(remedios)
 
     nextPage = navigation;
 
@@ -50,15 +65,18 @@ const HomeScreen = ({navigation, route}) => {
         <View>
         <ScrollView>
             <View style={styles.container}>
-
-            {/* {(rem!=null)? (rem.map((remedio, index)=>{
-                <Remedio nome = {remedio.name}
+            
+            {remedios.map((remedio, index)=>{
+                // console.log({remedios   });
+                // console.log(remedio.name);
+                return (<Remedio nome = {remedio.name}
                     horario= {remedio.time}
-                    qtdPorDia ="1"
-                    status="Consumida"/>
-            })):()}
-             */}
-                <Remedio nome="Metmorfina"
+                    qtdPorDia ={remedio.quantity}
+                    total={remedio.total}
+                    status="Consumir"/>)
+            })}
+            
+                {/* <Remedio nome="Metmorfina"
                 horario="18:00"
                 total="30"
                 qtdPorDia="2"
@@ -69,7 +87,7 @@ const HomeScreen = ({navigation, route}) => {
                 qtdPorDia="1"
                 status="Não consumida"/>
                 <Remedio nome="Metmorfina"
-                horario="18:00"/>
+                horario="18:00"/> */}
             </View>
         </ScrollView>
         </View>
