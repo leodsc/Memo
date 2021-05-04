@@ -1,6 +1,6 @@
 # Aplicativo MEMO para a disciplina Sistemas de Informação na UnB 2020/2
 
-### Alunos: Carolina, Leonardo, Nayara
+### Alunos: Caroline, Leonardo, Nayara
 
 ##Como rodar
 

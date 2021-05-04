@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen, nextPage } from './components/home';
 import { NovoRemedio } from './components/criarRemedio';
-import { Text, TouchableOpacity } from 'react-native';
+import { editarRemedio } from './components/editarRemedio';
+import { Text, TouchableOpacity, Button } from 'react-native';
 import { Cadastro } from './components/cadastro';
 
 const Stack = createStackNavigator();
@@ -20,8 +21,25 @@ export default function App() {
             },
             headerTintColor: '#fff',
             headerTitleStyle: 'bold',
+            headerRight: () => (
+              <Add />
+            ),
+          }
+        }/>
+        <Stack.Screen name="Editar Remédios" component={editarRemedio}
+        options={
+          {
+            headerStyle: {
+              backgroundColor: '#12263A',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: 'bold',
           headerRight: () => (
-            <Add/>
+            <Button
+                onPress={() => alert('editarRemedio')}  
+                title="OK"
+                color="#fff"
+              />
           ),
         }
         }/>
@@ -82,5 +100,5 @@ const styles = {
     headerTintColor: '#fff',
     headerTitleStyle: 'bold',
     title: 'Cadastrar Conta'
-  }
+  },
 }
