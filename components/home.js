@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
+import axios from "axios";
+
 import { 
     View, Text, Image, StyleSheet, 
     ScrollView, StatusBar, Button } from 'react-native';
@@ -7,13 +9,55 @@ import { Dimensions } from 'react-native';
 
 var nextPage;
 
+const GetRemedios= () =>{
+    let remedios = axios.get('http://localhost:8080/api/medicine/all').then(
+        (data)=>{
+            remedios = data.data;
+            return remedios;
+        }
+    ).catch((error)=>{
+        console.log(error)
+    })
+    return remedios
+}
+
 const HomeScreen = ({navigation, route}) => {
+    const [rem, setRem]= useState(null)
+
+    useEffect(()=>{
+
+        let auxrem=[]
+        axios.get('http://localhost:8080/api/medicine/all').then(
+            (data)=>{
+                data.data.map((currentvalue)=>{
+                    auxrem.push(currentvalue);
+                })
+                
+            }
+        ).catch((error)=>{
+            console.log(error)
+        })
+        setRem(auxrem);
+
+    })
+
     nextPage = navigation;
+
+
+
 
     return (
         <View>
         <ScrollView>
             <View style={styles.container}>
+
+            {/* {(rem!=null)? (rem.map((remedio, index)=>{
+                <Remedio nome = {remedio.name}
+                    horario= {remedio.time}
+                    qtdPorDia ="1"
+                    status="Consumida"/>
+            })):()}
+             */}
                 <Remedio nome="Metmorfina"
                 horario="18:00"
                 total="30"
