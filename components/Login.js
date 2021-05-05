@@ -7,7 +7,6 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
 import {
   Container,
   Title,
@@ -35,7 +34,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const api_url= "http://localhost:8080/api/auth/";
+  const api_url= "https://testingtwilioapi232323.loca.lt/";
 
 
   const onChangeUsername = (e) => {
@@ -95,10 +94,9 @@ export default function Login(props) {
         actions: [NavigationActions.navigate({ routeName: 'Home' })],
       })
 
-      setLoading(false)
-      console.log("teste");
+      setLoading(false);
       console.log(JSON.stringify(response.data));
-      props.navigation.dispatch(resetAction)
+      props.navigation.dispatch(resetAction);
     } catch (err) {
       console.log(err)
 
@@ -144,6 +142,13 @@ export default function Login(props) {
           ) : (
             <ButtonText>Prosseguir</ButtonText>
           )}
+        </Button>
+        <Button onPress={
+          () => {
+            props.navigation.navigate("Cadastrar");
+          }
+        }>
+          <ButtonText>Não tem uma conta? Cadastre-se!</ButtonText>
         </Button>
       </Form>
     </Container>

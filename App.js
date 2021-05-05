@@ -5,6 +5,7 @@ import { HomeScreen, nextPage } from './components/home';
 import { NovoRemedio } from './components/criarRemedio';
 import { Text, TouchableOpacity } from 'react-native';
 import { Cadastro } from './components/cadastro';
+import Login from './components/Login';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Meus Remédios" component={HomeScreen}
         options={
           {
@@ -27,7 +29,7 @@ export default function App() {
         }/>
         <Stack.Screen name="Novo Remedio" component={NovoRemedio}
         options={styles.novo}/>
-        {/* <Stack.Screen name="Cadastrar Conta" component={Cadastro} options={styles.cadastro}/> */}
+        <Stack.Screen name="Cadastrar" component={Cadastro} options={{title: "Cadastre-se"}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -77,9 +79,9 @@ const styles = {
   },
   cadastro: {
     headerStyle: {
-      backgroundColor: '#12263A',
+      backgroundColor: '#fff',
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#000',
     headerTitleStyle: 'bold',
     title: 'Cadastrar Conta'
   }

@@ -14,8 +14,20 @@ app.post('/', (req, res) => {
     console.log(req.body.Body);
 })
 
+app.post(`/register`, (req, res) => {
+    const body = req.body;
+    console.log("POST recebido\n");
+    if (body != undefined) {
+        res.sendStatus(200);
+    }
+})
+
+app.post('/signin', (req, res) => {
+    console.log(req);
+})
+
 app.listen(PORT, () => {
-    console.log(`Server running in port ${PORT}`)
+    console.log(`Server running on port ${PORT}`);
 })
 
 new Promise((resolve, reject) => {

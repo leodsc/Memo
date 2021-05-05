@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/runtime": "^7.14.0",
     "@react-native-async-storage/async-storage": "^1.15.4",
-    "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
     "axios": "^0.21.1",
@@ -30,7 +30,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^3.1.1",
+    "react-native-screens": "~3.0.0",
     "react-native-unimodules": "~0.13.3",
     "react-native-validator": "0.0.12",
     "react-native-web": "^0.16.1",
@@ -48,5 +48,19 @@
     "react-navigation-stack": "^2.10.4",
     "web-vitals": "^1.1.1"
   },
-  "private": true
+  "private": true,
+  "name": "Memo",
+  "description": "### Alunos: Carolina, Leonardo, Nayara",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leodsc/Memo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leodsc/Memo/issues"
+  },
+  "homepage": "https://github.com/leodsc/Memo#readme"
 }

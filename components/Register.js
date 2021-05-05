@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
-// import Form from "react-validation/build/form";
-// import Input from "react-validation/build/input";
-// import CheckButton from "react-validation/build/button";
-// import { isEmail } from "validator";
+import { View, Text, Image, TextInput } from "react-native";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
 
 import AuthService from "../services/auth.service";
 
@@ -101,19 +102,21 @@ const Register = (props) => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
+    <View className="col-md-12">
+      <View className="card card-container">
+        <Image
+          src={{uri: "//ssl.gstatic.com/accounts/ui/avatar_2x.png"}}
+          // alt="profile-img"
+          // className="profile-img-card"
         />
 
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
-            <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+            <View>
+              <View className="form-group">
+                <TextInput htmlFor="username">
+                  <Text>Username</Text>
+                  </TextInput>
                 <Input
                   type="text"
                   className="form-control"
@@ -122,10 +125,10 @@ const Register = (props) => {
                   onChange={onChangeUsername}
                   validations={[required, vusername]}
                 />
-              </div>
+              </View>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
+              <View className="form-group">
+                <TextInput htmlFor="email">Email</TextInput>
                 <Input
                   type="text"
                   className="form-control"
@@ -134,10 +137,12 @@ const Register = (props) => {
                   onChange={onChangeEmail}
                   // validations={[required, validEmail]}
                 />
-              </div>
+              </View>
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <View className="form-group">
+                <TextInput htmlFor="password">
+                  <Text>Password</Text>
+                </TextInput>
                 <Input
                   type="password"
                   className="form-control"
@@ -146,28 +151,28 @@ const Register = (props) => {
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
                 />
-              </div>
+              </View>
 
-              <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
-              </div>
-            </div>
+              <View className="form-group">
+                {/* <button className="btn btn-primary btn-block">Sign Up</button> */}
+              </View>
+            </View>
           )}
 
           {message && (
-            <div className="form-group">
-              <div
+            <View className="form-group">
+              <View
                 className={ successful ? "alert alert-success" : "alert alert-danger" }
                 role="alert"
               >
                 {message}
-              </div>
-            </div>
+              </View>
+            </View>
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
-      </div>
-    </div>
+      </View>
+    </View>
   );
 };
 

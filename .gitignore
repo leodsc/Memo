@@ -3,7 +3,6 @@
 android
 ios
 node_modules
-App.js
 app.json
 babel*
 metro*
