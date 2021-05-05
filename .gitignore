@@ -1,0 +1,10 @@
+.expo
+.vscode
+android
+ios
+node_modules
+app.json
+babel*
+metro*
+yarn.lock
+*.env
