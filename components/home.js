@@ -20,6 +20,7 @@ const HomeScreen = ({navigation, route}) => {
     useEffect(()=>{
         axios.get('https://memoapp.local.lt/get-medicine').then(res =>{
             console.log("remedios: " + res);
+            setRemedios(res.data);
         }).catch((error)=>{
             console.log(error)
         })
@@ -62,7 +63,7 @@ const HomeScreen = ({navigation, route}) => {
         </ScrollView>
         </View>
     )
-}
+}   
 
 const {width, height} = Dimensions.get('window');
 
