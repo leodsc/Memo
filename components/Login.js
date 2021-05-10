@@ -34,7 +34,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const api_url= "https://memoappserver.loca.lt/";
+  const api_url= "https://memoapp.loca.lt/";
 
 
   const onChangeUsername = (e) => {

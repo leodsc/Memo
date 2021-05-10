@@ -18,9 +18,8 @@ const HomeScreen = ({navigation, route}) => {
     // console.log(cUser)
 
     useEffect(()=>{
-        axios.get('https://testingtwilioapi232323.loca.lt/api/medicine/all').then(res =>{
-            // console.log(res.data)
-            setRemedios(res.data)
+        axios.get('https://memoapp.local.lt/get-medicine').then(res =>{
+            console.log("remedios: " + res);
         }).catch((error)=>{
             console.log(error)
         })
@@ -47,13 +46,7 @@ const HomeScreen = ({navigation, route}) => {
     return (
         <View>
         <ScrollView>
-            <View style={styles.container}>
-            <Remedio nome="Metilanima"
-            horario="18:00"
-            qtdPorDia="2"
-            total="30"
-            status="Consumir"/>
-            {/* { remedios.map((remedio, index)=>{
+            {remedios.map((remedio, index)=>{
                 // console.log({remedios   });
                 // console.log(remedio.name);
                 // if(user.id == remedio.userId){
@@ -65,9 +58,7 @@ const HomeScreen = ({navigation, route}) => {
                     status="Consumir"/>)
                 // }
                 // return(<p>Nao há nada para ver, crie um alarme</p>)
-            })} */}
-            
-            </View>
+            })}
         </ScrollView>
         </View>
     )

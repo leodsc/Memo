@@ -33,7 +33,11 @@ export const RemedioConsumido = (props) => {
             style={styles.buttonCtn}
             onPress={
                 () => {
-                    axios.post('https://memoappserver.loca.lt/consumido');
+                    console.log(remId);
+                    axios.post('https://memoappserver.loca.lt/consumido', JSON.stringify({
+                        medicineName: remId
+                    })).then(
+                        () => console.log("Mensagem enviada!"));
                 }
             }>
                 <Text style={styles.buttonText}>{props.text}</Text>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { isNumeric } from 'validator';
 import axios from 'axios';
 
 export const NovoRemedio = (props) => {
     var [hora, setHora] = useState(18);
     var [minuto, setMinuto] = useState(0);
-    var [remedio, setRemedio] = useState('');
+    let [remedio, setRemedio] = useState('');
     var [pillQtd, setPillQtd] = useState(1);
     var [intervalo, setIntervalo] = useState(1);
 
@@ -18,46 +19,70 @@ export const NovoRemedio = (props) => {
                 placeholderTextColor="#555"
                 placeholder="Digite o nome do remédio"
                 onChangeText={
-                    () => {setRemedio(remedio)}
+                    (value) => {
+                        setRemedio(value);
+                    }
                 }></TextInput>
             </View>
             <View style={s.qtd}>
                 <Text>Quantidade de pílulas</Text>
-                <Incrementer
-                changeText={() => {setPillQtd(pillQtd)}}/>
-            </View>
+                <View style={{width: 50, height: 50, marginHorizontal: 50}}>
+                    <View style={{flexDirection: 'row'}}>
+                            <TextInput
+                            style={s.quantity}
+                            onChangeText={
+                                (value) => {
+                                    if (isNumeric(value))
+                                    setPillQtd(value)
+                                }
+                                }>
+                                <Text style={{textAlign: 'center'}}>{props.variable}</Text>
+                            </TextInput>
+                        </View>
+                    </View>
+                </View>
             <View style={s.info}>
                 <View style={{flexDirection: 'row', marginTop: 5}}>
                     <Text>Horário Inicial: </Text>
-                    <TextInput 
-                    onChangeText={
-                        () => {setHora(hora)}
-                    }
-                    style={s.input}>18</TextInput>
-                    <Text style={{fontSize: 23}}>:</Text>
-                    <TextInput 
-                    onChangeText={
-                        () => {setMinuto(minuto)}
-                    }
-                    style={s.input}>00</TextInput>
+                    <View style={{flexDirection: 'row', marginHorizontal: 60}}>
+                        <TextInput 
+                        onChangeText={
+                            (value) => {setHora(value)}
+                        }
+                        style={s.input}>18</TextInput>
+                        <Text style={{fontSize: 23}}>:</Text>
+                        <TextInput 
+                        onChangeText={
+                            (value) => {setMinuto(value)}
+                        }
+                        style={s.input}>00</TextInput>
+                    </View>
                 </View>
             </View>
             <View style={s.qtd}>
                 <Text>Intervalo de tempo</Text>
-                <Incrementer
-                changeText={() => setIntervalo(intervalo)}/>
+                <View style={{width: 50, height: 50, marginHorizontal: 70}}>
+                    <View style={{flexDirection: 'row'}}>
+                            <TextInput
+                            style={s.quantity}
+                            onChangeText={(value) => setIntervalo(value)}>
+                                <Text style={{textAlign: 'center'}}>{props.variable}</Text>
+                            </TextInput>
+                    </View>
+                </View>
             </View>
             <TouchableOpacity
             style={s.criar}
             onPress={() => {
-                axios.post('https://memoappserver.loca.lt/add-medicine', JSON.stringify({
+                console.log(remedio);
+                axios.post('https://memoapp.loca.lt/add-medicine', JSON.stringify({
                     medicineName: remedio,
                     numPills: pillQtd,
                     interval: intervalo,
                     hora: hora,
                     min: minuto
                 })).then(
-                    () => props.navigation.navigate('Meus Remédios')
+                    () => props.navigation.navigate('Meus Remédios'), console.log("added")
                 )
             }
             }>
@@ -69,29 +94,21 @@ export const NovoRemedio = (props) => {
 }
 
 const Incrementer = (props) => {
-    var [counter, setCounter] = useState(1);
-
     return (
         <View style={{width: 50, height: 50, marginHorizontal: 50}}>
             <View style={{flexDirection: 'row'}}>
                 <View style={{marginHorizontal: 5}}>
                     <TouchableOpacity
                     style={s.incrementerButton}
-                    onPress={() => setCounter(counter+1)}>
+                    onPress={() => props.function(props.variable++)}>
                     </TouchableOpacity>
                     <TouchableOpacity 
                     style={s.incrementerButton}
-                    onPress={
-                        () => {
-                            if (counter > 0){
-                                setCounter(counter-1)
-                            }
-                            }}/>
+                    onPress={console.log('oi')}/>
                 </View>
-                <TextInput 
-                onChangeText={props.changeText}
+                <TextInput
                 style={s.quantity}>
-                    <Text style={{textAlign: 'center'}}>{counter}</Text>
+                    <Text style={{textAlign: 'center'}}>{props.variable}</Text>
                 </TextInput>
             </View>
         </View>
@@ -130,13 +147,6 @@ const s = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row'
     },
-    incrementerButton: {
-        width: 23,
-        height: 18,
-        backgroundColor: '#C8CDCB',
-        marginTop: 8,
-        borderRadius: 5,
-    },
     quantity: {
         backgroundColor: "#B2D86F",
         width: 38,
@@ -144,6 +154,8 @@ const s = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         marginTop: 10,
+        marginHorizontal: 25,
+        textAlign: 'center'
     },
     input: {
         width: 38,

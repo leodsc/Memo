@@ -23,7 +23,7 @@ export const Remedio = (props) => {
                     color="#EBAD6F"/>
                 </View>
             </ScrollView>
-            <RemedioConsumido id={props.key} subtraia={props.total} 
+            <RemedioConsumido id={props.nome} subtraia={props.total} 
             text={props.status}/>
         </View>
     )

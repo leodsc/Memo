@@ -1,11 +1,22 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
+
 const initDB = () => {
     const url = 'mongodb://localhost:27017';
     const client = new MongoClient(url, {useUnifiedTopology: true});
-
+    
     return client;
+}
+
+const removeEverything = () => {
+    const client = initDB();
+
+    client.connect(() => {
+        const db = client.db("Memo");
+        const collections = db.collection("Medicines");
+        collections.remove({});
+    })
 }
 
 const addMedicine = (dados) => {
@@ -22,6 +33,27 @@ const addMedicine = (dados) => {
     })
 }
 
+const getMedicine = (username) => {
+    return new Promise((resolve, reject) => {
+        const client = initDB();
+
+        var medicines = [];
+
+        client.connect(() => {
+            const db = client.db("Memo");
+            const collections = db.collection("Medicines");
+            collections.find({}).toArray((err, docs) => {
+                docs.forEach((item) => {
+                    if (item.username == username) {
+                        medicines.push(docs);
+                    }
+                })
+                resolve(medicines);
+            })
+        })
+    })
+}
+
 const updateContacts = (dados) => {
     return new Promise((resolve, reject) => {
         const client = initDB();
@@ -34,6 +66,7 @@ const updateContacts = (dados) => {
                     if (err != undefined){
                         reject("Error updating");
                     } else {
+                        console.log('updated!');
                         resolve();
                     }
                 })
@@ -108,17 +141,6 @@ const logUser = (db, dados) => {
     })
 }
 
-const sendMessage = (username, dados) => {
-    const client = initDB();
-
-    client.connect(() => {
-        const db = client.db("Memo");
-        const collections = db.collection("Whats");
-
-        collections.find({}, )
-    })
-}
-
 const isRegistered = (db, dados, callback) => {
     const collection = db.collection('Contas');
 
@@ -172,5 +194,6 @@ module.exports = {
     updateContacts: updateContacts,
     getContact: getContact,
     addMedicine: addMedicine,
-    sendMessage: sendMessage,
+    getMedicine: getMedicine,
+    removeEverything: removeEverything,
 };

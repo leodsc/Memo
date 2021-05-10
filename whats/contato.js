@@ -23,8 +23,6 @@ export const Contacts = (props) => {
     var [name, setName] = useState('');
     var [number, setNumber] = useState('');
 
-    console.log("Name inside tag:", props.name);
-
     return (
         <View style={styles.container}>
             <View style={styles.banner}>
@@ -58,8 +56,9 @@ export const Contacts = (props) => {
                     name: name,
                     number: number
                     })).then(() => {
-                        setContactName(name);
-                        setContactNumber(number);
+                        setName(name);
+                        setNumber(number);
+                        console.log('Atualizado');
                     }).catch(error => {
                         console.log(error);
                     })
