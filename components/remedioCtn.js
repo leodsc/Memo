@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         shadowRadius: 9.11,
         elevation: 14,
         borderRadius: 10,
+        marginHorizontal: 60,
     },
     info: {
         fontSize: 32,

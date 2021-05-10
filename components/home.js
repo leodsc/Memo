@@ -43,7 +43,7 @@ const HomeScreen = ({navigation, route}) => {
     return (
         <View>
         <ScrollView>
-            {remedios.map((remedio, index)=>{
+            {/* {remedios.map((remedio, index)=>{
                 // console.log({remedios   });
                 // console.log(remedio.name);
                 // if(user.id == remedio.userId){
@@ -55,7 +55,14 @@ const HomeScreen = ({navigation, route}) => {
                     status="Consumir"/>)
                 // }
                 // return(<p>Nao há nada para ver, crie um alarme</p>)
-            })}
+            })} */}
+            <Remedio
+            nome="Metilanina"
+            horario="18:00"
+            qtdPorDia="2"
+            total="30"
+            status="Consumir"
+            />
         </ScrollView>
         </View>
     )
