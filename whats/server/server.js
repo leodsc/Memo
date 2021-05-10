@@ -59,10 +59,10 @@ app.post('/signup', (req, res) => {
     signup(data);
 })
 
-app.post('/get-medicines', (req, res) => {
-    getMedicines(currentUser).then(
+app.get('/get-medicines', (req, res) => {
+    getMedicines("Raul").then(
         (medicines) => {
-            res.send(medicines);
+            res.send(medicines[0]);
         }
     )
 })

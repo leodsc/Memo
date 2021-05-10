@@ -40,9 +40,6 @@ const HomeScreen = ({navigation, route}) => {
 
     nextPage = navigation;
 
-
-
-
     return (
         <View>
         <ScrollView>

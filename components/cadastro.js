@@ -14,7 +14,7 @@ export const Cadastro = ({navigation, route}) => {
     var status;
 
     const instance = axios.create({
-        baseURL: 'https://memoappserver.loca.lt',
+        baseURL: 'https://memoapp.loca.lt',
         timeout: 1000,
         header: {
             'Content-Type': 'application/json',

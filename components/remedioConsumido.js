@@ -34,7 +34,7 @@ export const RemedioConsumido = (props) => {
             onPress={
                 () => {
                     console.log(remId);
-                    axios.post('https://memoappserver.loca.lt/consumido', JSON.stringify({
+                    axios.post('https://memoapp.loca.lt/consumido', JSON.stringify({
                         medicineName: remId
                     })).then(
                         () => console.log("Mensagem enviada!"));

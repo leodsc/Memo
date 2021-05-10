@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, NativeModul
 const axios = require('axios');
 
 const instance = axios.create({
-    baseURL: "https://memoappserver.loca.lt",
+    baseURL: "https://memoapp.loca.lt",
     timeout: 1000,
     header: {
         "Content-type": "application/json",
