@@ -1,14 +1,14 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const api_url= "http://localhost:8080/api/test/";
+const api_url= "https://testingtwilioapi232323.loca.lt/api/test/";
 
 const getPublicContent = () => {
-    return axios.get(API_URL + "all");
+    return axios.get(api_url + "all");
   };
   
   const getUserBoard = () => {
-    return axios.get(API_URL + "user", { headers: authHeader() });
+    return axios.get(api_url + "user", { headers: authHeader() });
   };
 
   export default {

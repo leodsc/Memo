@@ -1,29 +1,109 @@
 const express = require('express');
 const localtunnel = require('localtunnel');
 const bodyParser = require('body-parser');
+require('dotenv').config({path: '/home/leonardo/UnB/8-semestre/SI/Trabalho/Memo/.env'});
+const accountSID = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSID, authToken);
+    
+const mongo = require('../../mongo');
+const signin = mongo.signin;
+const signup = mongo.signup;
+const updateContacts = mongo.updateContacts;
+const getContact = mongo.getContact;
+const addMedicine = mongo.addMedicine;
+const getMedicines = mongo.getMedicine;
+const removeEverything = mongo.removeEverything;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+var currentUser;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/', (req, res) => {
-    // if (req.body.Body.split(" ")[0] == 'Adicionar'){
-    //     console.log('numero adicionado');
-    // }
-    console.log(req.body.Body);
-})
+// removeEverything();
 
-app.post(`/register`, (req, res) => {
-    const body = req.body;
-    console.log("POST recebido\n");
-    if (body != undefined) {
-        res.sendStatus(200);
+getMedicines(currentUser).then(
+    res => console.log(res)
+)
+
+app.post(`/add-number`, (req, res) => {
+    const data = JSON.parse(Object.keys(req.body)[0]);
+    data.username = currentUser;
+    if (data != undefined) {
+        updateContacts(data).then(() => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log(error.message);
+        })
+    } else {
+        res.sendStatus(500);
     }
 })
 
+app.post('/add-medicine', (req, res) => {
+    const data = JSON.parse(Object.keys(req.body)[0]);
+    data.username = currentUser;
+    addMedicine(data).then(
+        (result) => {
+            if (result == "OK") {
+                res.send("OK");
+            }
+        }
+    );
+})
+
+app.post('/signup', (req, res) => {
+    const data = JSON.parse(Object.keys(req.body)[0]);
+    signup(data);
+})
+
+app.get('/get-medicines', (req, res) => {
+    getMedicines("Raul").then(
+        (medicines) => {
+            res.send(medicines[0]);
+        }
+    )
+})
+
+app.post('/consumido', (req, res) => {
+    const data = JSON.parse(Object.keys(req.body)[0]);
+    getContact(currentUser).then(
+        (result) => {
+            client.messages.create({
+                from: 'whatsapp:+14155238886',
+                body: `Olá, ${result[0]}, ${currentUser} consumiu ${data.medicineName}.`,
+                to: `whatsapp:+55${result[1]}`
+            }).then(
+                message => console.log(message.sid)
+            )
+        }
+    );
+})
+
+getMedicines("Raul").then(
+                (res) => console.log(res)
+            )
+
 app.post('/signin', (req, res) => {
-    console.log(req);
+    const data = JSON.parse(Object.keys(req.body)[0]);
+    signin(data).then(result => {
+        if (result) {
+            currentUser = data.username;
+            console.log("Current User: " + currentUser);
+
+            res.send("OK");
+        } else {
+            res.send('NOT FOUND');
+        }
+    })
+})
+
+app.post('/check-contact', (req, res) => {
+    getContact(currentUser).then((result) => {
+        res.send(result);
+    })
 })
 
 app.listen(PORT, () => {
@@ -31,7 +111,7 @@ app.listen(PORT, () => {
 })
 
 new Promise((resolve, reject) => {
-    const SUB_DOMAIN = "testingtwilioapi232323"
+    const SUB_DOMAIN = "memoapp";
     const tunnel = localtunnel({port: PORT, subdomain: SUB_DOMAIN});
     resolve(tunnel);
 }).then(tunnel => {

@@ -34,7 +34,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
-  const api_url= "https://testingtwilioapi232323.loca.lt/";
+  const api_url= "https://memoapp.loca.lt/";
 
 
   const onChangeUsername = (e) => {
@@ -49,6 +49,21 @@ export default function Login(props) {
 
   async function saveUser(user) {
     await AsyncStorage.setItem('@user', JSON.stringify(user))
+  }
+
+  const log = () => {
+    axios.post(api_url+'signin', JSON.stringify({
+      username: username,
+      password: password,
+    })).then(result => {
+      if (result.request.response == "OK") {
+        props.navigation.navigate('Meus Remédios');
+      } else {
+        console.log("NONO");
+      }
+    }).catch(err => {
+      console.log(err.message);
+    })
   }
 
   const handleLogin = async (e) => {
@@ -136,7 +151,7 @@ export default function Login(props) {
           onChangeText={password => setPassword(password)}
         />
 
-        <Button onPress={handleLogin}>
+        <Button onPress={log}>
           {loading ? (
             <ActivityIndicator size="small" color="#FFF" />
           ) : (
