@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen, nextPage } from './components/home';
 import { NovoRemedio } from './components/criarRemedio';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, Touchable, TouchableOpacity, View } from 'react-native';
 import { Cadastro } from './components/cadastro';
 import Login from './components/Login';
+import { Contacts, ContactButton } from './whats/contato';
+import Register from './components/Register';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  var [showContact, setShowContact] = useState(false);
+
   return (
+    <>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login}/>
@@ -23,7 +28,17 @@ export default function App() {
             headerTintColor: '#fff',
             headerTitleStyle: 'bold',
           headerRight: () => (
-            <Add/>
+            <View style={{flexDirection: 'row'}}>
+              <Add/>
+              <TouchableOpacity
+              onPress={
+                () => {
+                  setShowContact(!showContact);
+                }
+              }>
+                <ContactButton/>
+              </TouchableOpacity>
+            </View>
           ),
         }
         }/>
@@ -32,6 +47,8 @@ export default function App() {
         <Stack.Screen name="Cadastrar" component={Cadastro} options={{title: "Cadastre-se"}}/>
       </Stack.Navigator>
     </NavigationContainer>
+    <>{showContact ? <Contacts/> : null}</>
+    </>
   );
 }
 

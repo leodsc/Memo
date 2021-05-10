@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button } from './styles';
+import axios from 'axios';
 
 export const RemedioConsumido = (props) => {
     let a = props.subtraia;
@@ -22,12 +23,21 @@ export const RemedioConsumido = (props) => {
 
 
         <View style={{alignItems: 'center'}}>
-            <Button onPress={consumeMedicine()}
+            {/* <Button onPress={consumeMedicine()}
                     title="Consumir"
                     color= "#D0F68E"
                     accessibilityLabel="Press this button to consume your medicine"
             
-            ></Button>
+            ></Button> */}
+            <TouchableOpacity
+            style={styles.buttonCtn}
+            onPress={
+                () => {
+                    axios.post('https://memoappserver.loca.lt/consumido');
+                }
+            }>
+                <Text style={styles.buttonText}>{props.text}</Text>
+            </TouchableOpacity>
             {/* <View style={styles.buttonCtn}>
                 <Text style={styles.buttonText}>{props.text}</Text>
             </View> */}

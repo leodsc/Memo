@@ -8,3 +8,4 @@ babel*
 metro*
 yarn.lock
 *.env
+database

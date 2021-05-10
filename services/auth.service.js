@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api_url= "http://localhost:8080/api/auth/";
+const api_url= "https://memoapp.local.lt/api/auth/";
 
 class AuthService{
 
@@ -32,7 +32,7 @@ class AuthService{
     };
     
     logout = async ()=>{
-        try {
+        try { 
             await AsyncStorage.removeItem("@user");
             return true;
         }

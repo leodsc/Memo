@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const { width, height } = Dimensions.get('window');
 
-export const Cadastro = () => {
+export const Cadastro = ({navigation, route}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +14,7 @@ export const Cadastro = () => {
     var status;
 
     const instance = axios.create({
-        baseURL: 'https://testingtwilioapi232323.loca.lt',
+        baseURL: 'https://memoappserver.loca.lt',
         timeout: 1000,
         header: {
             'Content-Type': 'application/json',
@@ -42,12 +42,13 @@ export const Cadastro = () => {
                 <TouchableOpacity style={styles.button} 
                 onPress={() => {
                     if (name.length > 3 && isEmail(email) && isStrongPassword(password)) {
-                        instance.post('/register', JSON.stringify({
-                            name: name,
+                        instance.post('/signup', JSON.stringify({
+                            username: name,
                             password: password,
                             email: email,
                         })).then((resolve) => {
                             status = resolve.status;
+                            console.log(status);
                         }).catch((error) => {
                             console.log(error);
                         })
@@ -57,11 +58,6 @@ export const Cadastro = () => {
                         setMessage("Email não é válido.");
                     } else {
                         setMessage(`Senha deve ter no mínimo 8 caracteres com:\n 1 letra minúscula\n 1 letra maiúscula\n 1 número\n 1 símbolo`)
-                    }
-                    if (status == "200") {
-
-                    } else {
-                        
                     }
                 }}>
                     <Text style={styles.buttonText}>Criar Conta</Text>

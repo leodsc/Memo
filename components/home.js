@@ -11,8 +11,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var nextPage;
 
-
-
 const HomeScreen = ({navigation, route}) => {
     // const { remedios, loading} = tryRemedies();
     const[remedios, setRemedios] = useState([])
@@ -20,7 +18,7 @@ const HomeScreen = ({navigation, route}) => {
     // console.log(cUser)
 
     useEffect(()=>{
-        axios.get('http://localhost:8080/api/medicine/all').then(res =>{
+        axios.get('https://testingtwilioapi232323.loca.lt/api/medicine/all').then(res =>{
             // console.log(res.data)
             setRemedios(res.data)
         }).catch((error)=>{
@@ -50,8 +48,12 @@ const HomeScreen = ({navigation, route}) => {
         <View>
         <ScrollView>
             <View style={styles.container}>
-            
-            { remedios.map((remedio, index)=>{
+            <Remedio nome="Metilanima"
+            horario="18:00"
+            qtdPorDia="2"
+            total="30"
+            status="Consumir"/>
+            {/* { remedios.map((remedio, index)=>{
                 // console.log({remedios   });
                 // console.log(remedio.name);
                 // if(user.id == remedio.userId){
@@ -63,7 +65,7 @@ const HomeScreen = ({navigation, route}) => {
                     status="Consumir"/>)
                 // }
                 // return(<p>Nao há nada para ver, crie um alarme</p>)
-            })}
+            })} */}
             
             </View>
         </ScrollView>
