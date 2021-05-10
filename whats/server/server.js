@@ -2,7 +2,7 @@ const express = require('express');
 const localtunnel = require('localtunnel');
 const bodyParser = require('body-parser');
 
-const mongo = require('../../database/mongo');
+const mongo = require('../../mongo');
 const signin = mongo.signin;
 const signup = mongo.signup;
 const updateContacts = mongo.updateContacts;
